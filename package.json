@@ -1,9 +1,10 @@
 {
-  "name": "ooh",
+  "name": "@lizhineng/ooh",
   "version": "0.0.1",
   "type": "module",
   "description": "Value parsing and validation for WeChat Mini Program.",
-  "main": "index.js",
+  "miniprogram": "dist",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest"
   },

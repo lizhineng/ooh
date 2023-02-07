@@ -1,26 +1,12 @@
-import Empty from './empty'
-import ValidationError from './validation-error'
+import MaxLength from "./rules/max-length"
+import MinLength from "./rules/min-length"
+import Required from "./rules/required"
+import ValueType from "./value-type"
 
-class StringBuilder {
-    protected rules = []
+class StringValue extends ValueType {
+    protected casted: string|null
 
-    protected casted: string
-
-    required() {
-        this.rules.push(new Empty)
-
-        return this
-    }
-
-    casts(value: unknown) {
-        this.casted = this.castsValue(value)
-
-        this.validate()
-
-        return this.casted
-    }
-
-    protected castsValue(value: unknown) {
+    protected castValue(value: unknown) {
         if (value === null || value === undefined) {
             return ''
         }
@@ -28,15 +14,23 @@ class StringBuilder {
         return value.toString()
     }
 
-    protected validate() {
-        this.rules.forEach(rule => {
-            if (!rule.apply(this.casted)) {
-                throw new ValidationError(rule.message())
-            }
-        })
+    required() {
+        this.rules.push(new Required)
 
-        return true
+        return this
+    }
+
+    min(length: number) {
+        this.rules.push(new MinLength(length))
+
+        return this
+    }
+
+    max(length: number) {
+        this.rules.push(new MaxLength(length))
+
+        return this
     }
 }
 
-export default () => new StringBuilder
+export default () => new StringValue
