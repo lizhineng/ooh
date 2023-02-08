@@ -8,12 +8,12 @@ class Required implements Rule {
     }
 
     apply(value: unknown): boolean {
-        if (typeof value === 'string') {
-            return value !== ''
-        }
-
         if (value === undefined || value === null) {
             return false
+        }
+
+        if (typeof value === 'string') {
+            return value !== ''
         }
 
         return true
