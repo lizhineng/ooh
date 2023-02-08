@@ -1,5 +1,6 @@
 import ValueType from './value-type'
 import Required from './rules/required'
+import Before from './rules/before'
 
 class DateValue extends ValueType {
     protected casted: Date|null
@@ -18,6 +19,12 @@ class DateValue extends ValueType {
 
     required() {
         this.rules.push(new Required)
+
+        return this
+    }
+
+    before(date: Date|string|number) {
+        this.rules.push(new Before(date))
 
         return this
     }
