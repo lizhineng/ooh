@@ -20,7 +20,7 @@ class Required implements Rule {
     }
 
     message(): string {
-        return 'The value is requried'
+        return 'The value is required.'
     }
 }
 
