@@ -1,3 +1,4 @@
+import After from './rules/after'
 import ValueType from './value-type'
 import Required from './rules/required'
 import Before from './rules/before'
@@ -25,6 +26,12 @@ class DateValue extends ValueType {
 
     before(date: Date|string|number) {
         this.rules.push(new Before(date))
+
+        return this
+    }
+
+    after(date: Date|string|number) {
+        this.rules.push(new After(date))
 
         return this
     }
